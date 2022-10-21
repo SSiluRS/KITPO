@@ -6,9 +6,12 @@ import main.data.builder.UserTypeBuilder;
 import main.ui.ListActionListener;
 import main.ui.ListActionListenerImpl;
 import main.ui.UI;
+import main.ui.UISerialisation;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.SortedMap;
 
 public class Main {
 
@@ -70,6 +73,22 @@ public class Main {
             list.add(builder.create(), 0);
             System.out.println("\nafter add to 0 index");
             list.forEach(System.out::println);
+            try {
+                UISerialisation.saveToFile("file.dat",list,builder);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            List list1 = new List();
+            try {
+                UISerialisation.loadFromFile("file.dat",builder, list1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("\nSaved List:");
+            list.forEach(System.out::println);
+            System.out.println("\n\n");
+            System.out.println("Loaded List:");
+            list1.forEach(System.out::println);
 
         }
 
