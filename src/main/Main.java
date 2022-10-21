@@ -34,6 +34,10 @@ public class Main {
 
     public static void main(String[] args) {
         var userTypeList = Arrays.asList("PolarVector","Double");
+
+        ListActionListener listActionListener = new ListActionListenerImpl();
+        new UI(listActionListener);
+
         for (String s : userTypeList) {
 
             System.out.println(s + ": ");
@@ -43,11 +47,7 @@ public class Main {
             test(builder);
 
             List list = new List();
-            list.add(builder.create());
-            list.add(builder.create());
-            list.add(builder.create());
-            list.add(builder.create());
-            list.add(builder.create());
+            for (int j = 0; j < 10; j++) list.add(builder.create());
             System.out.println("initial");
             list.forEach(System.out::println);
 
@@ -63,10 +63,6 @@ public class Main {
             System.out.println("\nafter remove from 0 index");
             list.forEach(System.out::println);
 
-            list.remove(2);
-            System.out.println("\nafter remove from 2 index");
-            list.forEach(System.out::println);
-
             list.add(builder.create(), 1);
             System.out.println("\nafter add to 1 index");
             list.forEach(System.out::println);
@@ -75,12 +71,7 @@ public class Main {
             System.out.println("\nafter add to 0 index");
             list.forEach(System.out::println);
 
-            list.add(builder.create(), 3);
-            System.out.println("\nafter add to 3 index");
-            list.forEach(System.out::println);
         }
 
-        ListActionListener listActionListener = new ListActionListenerImpl();
-        new UI(listActionListener);
     }
 }
